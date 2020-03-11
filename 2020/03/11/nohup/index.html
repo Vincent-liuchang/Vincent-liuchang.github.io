@@ -22,18 +22,19 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="留学党，攻城狮。小刘，在澳洲读书的学生党一枚，即将毕业走上工作岗位，大概率去上海工作。找工作的时候因为不懂SpringBoot，被问傻了，所以就开始了解什么是SpringBoot，想自己动手做个个人网页和博客来记录自己的学习过程和生活。喜欢运动，喜欢吉他（虽然弹的不好），喜欢好看的照片，喜欢做一夜暴富的梦，向往开着房车四处扎营的生活。没有养狗，已经给狗取好了名字。这就是简单平凡的小刘。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="关于小刘">
-<meta property="og:url" content="http://yoursite.com/about/index.html">
+  <meta name="description" content="笔记不挂断的运行进程1$ nohup Command [ Arg … ] [　&amp; ]  查看当前有多少在后台运行的命令单次shell内有效 1$ jobs -l  Process Status 1$ ps -ef 1$ ps aux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于nohup的一些记录">
+<meta property="og:url" content="http://yoursite.com/2020/03/11/nohup/index.html">
 <meta property="og:site_name" content="Vincent Blog">
-<meta property="og:description" content="留学党，攻城狮。小刘，在澳洲读书的学生党一枚，即将毕业走上工作岗位，大概率去上海工作。找工作的时候因为不懂SpringBoot，被问傻了，所以就开始了解什么是SpringBoot，想自己动手做个个人网页和博客来记录自己的学习过程和生活。喜欢运动，喜欢吉他（虽然弹的不好），喜欢好看的照片，喜欢做一夜暴富的梦，向往开着房车四处扎营的生活。没有养狗，已经给狗取好了名字。这就是简单平凡的小刘。">
-<meta property="article:published_time" content="2020-03-10T06:58:51.000Z">
-<meta property="article:modified_time" content="2020-03-10T07:25:49.621Z">
+<meta property="og:description" content="笔记不挂断的运行进程1$ nohup Command [ Arg … ] [　&amp; ]  查看当前有多少在后台运行的命令单次shell内有效 1$ jobs -l  Process Status 1$ ps -ef 1$ ps aux">
+<meta property="article:published_time" content="2020-03-11T06:57:36.000Z">
+<meta property="article:modified_time" content="2020-03-11T07:18:05.229Z">
 <meta property="article:author" content="Vincent Liu">
+<meta property="article:tag" content="Linux Study">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/about/">
+<link rel="canonical" href="http://yoursite.com/2020/03/11/nohup/">
 
 
 <script id="page-configurations">
@@ -41,12 +42,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false
+    isPost : true
   };
 </script>
 
-  <title>关于小刘 | Vincent Blog
-  </title>
+  <title>关于nohup的一些记录 | Vincent Blog</title>
   
 
 
@@ -154,45 +154,101 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
           <div class="content">
             
 
   <div class="posts-expand">
-    
-    
-    
-    <div class="post-block" lang="zh-han">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-han">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/11/nohup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Vincent Liu">
+      <meta itemprop="description" content="一个记录生活学习和工作的地方">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vincent Blog">
+    </span>
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          关于nohup的一些记录
+        </h1>
 
-<h1 class="post-title" itemprop="name headline">关于小刘
-</h1>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
 
-<div class="post-meta">
+              <time title="Created: 2020-03-11 17:57:36 / Modified: 18:18:05" itemprop="dateCreated datePublished" datetime="2020-03-11T17:57:36+11:00">2020-03-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Memorable/" itemprop="url" rel="index"><span itemprop="name">Memorable</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><h3 id="不挂断的运行进程"><a href="#不挂断的运行进程" class="headerlink" title="不挂断的运行进程"></a>不挂断的运行进程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nohup Command [ Arg … ] [　&amp; ]</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看当前有多少在后台运行的命令"><a href="#查看当前有多少在后台运行的命令" class="headerlink" title="查看当前有多少在后台运行的命令"></a>查看当前有多少在后台运行的命令</h3><p>单次shell内有效</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">jobs</span> -l</span><br></pre></td></tr></table></figure>
+
+<p>Process Status</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ps -ef</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ps aux</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux-Study/" rel="tag"># Linux Study</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/10/hello-world/" rel="prev" title="Hello World">
+      <i class="fa fa-chevron-left"></i> Hello World
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
-          <p>留学党，攻城狮。<br>小刘，在澳洲读书的学生党一枚，即将毕业走上工作岗位，大概率去上海工作。<br>找工作的时候因为不懂SpringBoot，被问傻了，所以就开始了解什么是SpringBoot，想自己动手做个个人网页和博客来记录自己的学习过程和生活。<br>喜欢运动，喜欢吉他（虽然弹的不好），喜欢好看的照片，喜欢做一夜暴富的梦，向往开着房车四处扎营的生活。<br>没有养狗，已经给狗取好了名字。<br>这就是简单平凡的小刘。</p>
-
-      </div>
-      
-      
-      
-    </div>
-    
-
-    
-    
-    
   </div>
 
 
@@ -244,6 +300,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#笔记"><span class="nav-number">1.</span> <span class="nav-text">笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#不挂断的运行进程"><span class="nav-number">1.1.</span> <span class="nav-text">不挂断的运行进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看当前有多少在后台运行的命令"><span class="nav-number">1.2.</span> <span class="nav-text">查看当前有多少在后台运行的命令</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
