@@ -187,6 +187,19 @@ header .menu .menu-item-link:hover {
 .archive .post-archive {
   list-style: none;
 }
+.archive .catelist {
+  margin-top: 5%;
+}
+.archive .catelist a {
+  margin-left: 20px;
+  font-size: 1.5em;
+  color: #6e6e6e;
+  text-decoration: none;
+}
+.archive .catelist a:hover {
+  color: #060;
+  text-decoration: underline;
+}
 .widget {
   margin-top: 5%;
 }
@@ -195,20 +208,20 @@ header .menu .menu-item-link:hover {
   flex: 33.33%;
   text-align: right;
 }
-.sidebar .title {
+.title {
   font-size: 1em;
 }
-.sidebar .content {
+.content {
   margin-top: 2%;
 }
-.sidebar .content a {
+.content a {
   color: #6e6e6e;
   text-decoration: none;
 }
-.sidebar .content a:hover {
+.content a:hover {
   color: #060;
   text-decoration: underline;
 }
-.sidebar ul {
+ul {
   list-style-type: "";
 }
