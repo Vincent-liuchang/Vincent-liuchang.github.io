@@ -133,6 +133,11 @@ topTerminal .text-body {
 .post .post-content {
   font-size: 0.8em;
 }
+.post .post-content code:not(.hljs) {
+  padding: 2px;
+  border-radius: 5px;
+  background-color: #eee;
+}
 .post .post-content a {
   color: #060;
   text-decoration: none;

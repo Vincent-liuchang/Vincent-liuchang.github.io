@@ -78,13 +78,13 @@
 <p>解决方式：将post对象传递到post-meta中，就可以在post-meta中直接调用。</p>
 <pre><code class="javascript">&lt;!--index.ejs--&gt;
 &lt;%- partial(&#39;_partial/post-meta&#39;,{post: post}) %&gt;</code></pre>
-<p>在<a href="url'https://ngudream.com/2016/07/09/hexo-advanced/'">这篇博客</a>中有更加详细的说明和介绍。</p>
+<p>在<a href="https://ngudream.com/2016/07/09/hexo-advanced/" target="_blank" rel="noopener">这篇博客</a>中有更加详细的说明和介绍。</p>
 <h1 id="创建一个显示所有分类-标签的页面"><a href="#创建一个显示所有分类-标签的页面" class="headerlink" title="创建一个显示所有分类/标签的页面"></a>创建一个显示所有分类/标签的页面</h1><p>主题中原有的<code>category.ejs</code>和<code>tag.ejs</code>文件都是属于单个对象的页面。<br>Hexo内置会创建页面显示某个<code>categories</code>下的所有文章，<code>tag</code>同理.</p>
 <p>e.g. <code>categories/technique.html</code></p>
 <p>但不会像<code>archive</code>一样自动创建一个<code>categories/index.html.</code><br>使用其他主题的时候,同样<code>categories</code>，<code>tags</code>需要在根目录<code>source</code>文件夹下面创一个对应的文件夹，再创建一个<code>index.md</code>，Hexo 里面没有预置。</p>
 <p>解决方式:</p>
 <ol>
-<li>Hexo new page categories<br><code>source/categories/index.md</code>修改<code>type:&quot;categories&quot;</code></li>
+<li><code>$ Hexo new page categories</code><br><code>source/categories/index.md</code>修改<code>type:&quot;categories&quot;</code></li>
 <li><code>layout/_partial</code>中创建<code>categories.ejs</code><pre><code class="javascript">&lt;div class=&quot;container&quot;&gt;
 &lt;div class=&quot;archive&quot;&gt;
    &lt;div class=&quot;archive-title&quot;&gt;分类&lt;/div&gt;
@@ -107,7 +107,7 @@
 &lt;% } %&gt;</code></pre>
 </li>
 </ol>
-<p>自己第一次做的时候走了非常多的弯路，看了半天hexo文档也没搞清楚，最后看到了<a href="url'https://ngudream.com/2016/07/09/hexo-advanced/'">这篇博客</a>，解决了问题，感谢博主的记录和分享。</p>
+<p>自己第一次做的时候走了非常多的弯路，看了半天hexo文档也没搞清楚，最后看到了<a href="https://ngudream.com/2016/07/09/hexo-advanced/" target="_blank" rel="noopener">这篇博客</a>，解决了问题，感谢博主的记录和分享。</p>
 
       </div>
     </article>
