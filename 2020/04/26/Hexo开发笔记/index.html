@@ -41,8 +41,8 @@
 </header>
 
         <main class="main">
-            <div class="container">
-  <div class="postBox">
+            <div class="post-container">
+    <div class="postBox">
     <article class="post">
       <div class="post-title">
         <div class="post-title">
@@ -56,14 +56,14 @@
     <span class="post-meta-item post-meta-categories">
         /
         
-        <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+        <a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
         
     </span>
 
     <span class="post-meta-item post-meta-tags">
         /
         
-        <a class="tag-link" href="/tags/Hexo/" rel="tag">#HEXO</a>
+        <a class="tag-link" href="/tags/EJS/" rel="tag">#EJS</a>, <a class="tag-link" href="/tags/Hexo/" rel="tag">#HEXO</a>
         
     </span>
 </post-meta>
@@ -72,9 +72,33 @@
           / <span id="busuanzi_value_page_pv"></span> views
         </span>
       </div>
-      <div class="post-content">
-        <p>自己开发一个HEXO主题可能会踩到的坑<br> <a id="more"></a></p>
-<h1 id="将本地变量传递到局部中去"><a href="#将本地变量传递到局部中去" class="headerlink" title="将本地变量传递到局部中去"></a>将本地变量传递到局部中去</h1><p>使用情景：在主页的文章列表中显示文章的分类和标签信息。因为post-meta在很多的页面都会用到，所以想要分离出来。</p>
+      <div class="post-content" id ="post-content">
+        <p>自己开发一个HEXO主题可能会踩到的坑.<br>模版引擎-ejs, CSS预处理-stylus.<br> <a id="more"></a></p>
+<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>之前在用别人的主题，觉得不够有趣，缺乏掌控感，就想自己做一个比较简单的主题。参考了一众大佬的主题，很多大佬的博客已经写的很详尽了，在初期，我是依靠着 <a href="https://www.ahonn.me/blog/create-a-hexo-theme-from-scratch" target="_blank" rel="noopener">AHONN’S BLOG–从零开始制作 Hexo 主题</a> 慢慢摸索开始的。在这里仅记录一些我纠结过踩过坑的地方。</p>
+<h1 id="Hexo变量"><a href="#Hexo变量" class="headerlink" title="Hexo变量"></a>Hexo变量</h1><h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><p>具体的变量常用的官方文档里都有了，就不多说了。我在学习过程中，主要是forEach那个地方花过一段时间。针对<code>list_categories</code>,<code>list_posts</code>举两个具体的例子。</p>
+<pre><code class="javascript">&lt;!--cateList.ejs--&gt;
+&lt;% site.categories.each(function(category) { %&gt;
+   &lt;li&gt;&lt;a href=&quot;&lt;%- url_for(category.path) %&gt;&quot;&gt;·&lt;%= category.name%&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;% }); %&gt;
+
+&lt;!--index.ejs--&gt;
+&lt;section class = &quot;posts&quot;&gt;
+    &lt;% page.posts.each(function (post) { %&gt;
+      &lt;article class=&quot;post&quot;&gt;
+        &lt;div class=&quot;post-title&quot;&gt;
+          &lt;a class=&quot;post-title-link&quot; href=&quot;&lt;%- url_for(post.path) %&gt;&quot;&gt;&lt;%= post.title %&gt;&lt;/a&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;post-meta&quot;&gt;
+            &lt;%- partial(&#39;_partial/post-meta&#39;,{post: post}) %&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;post-excerpt&quot;&gt;
+          &lt;%- post.excerpt %&gt;
+        &lt;/div&gt;
+      &lt;/article&gt;
+    &lt;% }) %&gt;
+&lt;/section&gt;</code></pre>
+<p>第一个是用来显示所有的分类的，每一个分类创建列表中的一行。<br>第二个是用来显示博客内所有文章的。<br>都不难理解，但自己写的时候经常犯错。(我对前端的技术全都是摸着石头过河)</p>
+<h2 id="将本地变量传递到局部中去"><a href="#将本地变量传递到局部中去" class="headerlink" title="将本地变量传递到局部中去"></a>将本地变量传递到局部中去</h2><p>使用情景：在主页的文章列表中显示文章的分类和标签信息。因为post-meta在很多的页面都会用到，所以想要分离出来。</p>
 <p>遇到的问题：post对象需要在post-meta外部通过遍历site.posts来获得,但是需要在post-meta内部调用获得具体value。</p>
 <p>解决方式：将post对象传递到post-meta中，就可以在post-meta中直接调用。</p>
 <pre><code class="javascript">&lt;!--index.ejs--&gt;
@@ -109,11 +133,21 @@
 </li>
 </ol>
 <p>自己第一次做的时候走了非常多的弯路，看了半天hexo文档也没搞清楚，最后看到了<a href="https://ngudream.com/2016/07/09/hexo-advanced/" target="_blank" rel="noopener">这篇博客</a>，解决了问题，感谢博主的记录和分享。</p>
+<h1 id="代码部分高亮"><a href="#代码部分高亮" class="headerlink" title="代码部分高亮"></a>代码部分高亮</h1><p>Hexo内置的是highlight.js实现代码高亮，但我数次尝试发现有问题，无法显示。于是查阅了一下相关资料，以及highlight的官网：有非常详细的使用说明<a href="https://highlightjs.org/usage/" target="_blank" rel="noopener">usage</a>。支持非常多的语言。<br>具体需要引入script，引入css。具体的颜色主题可以自由选择，我选择的是atom的one dark。</p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><ul>
+<li>官方<a href="https://hexo.io/docs/variables" target="_blank" rel="noopener">Doc</a>，大家都说写的不好，但是有还是比没有强。</li>
+<li>文章的目录和进度借鉴了<a href="https://www.cnblogs.com/yyhh/p/11058985.html" target="_blank" rel="noopener">这片教程</a>。</li>
+</ul>
 
       </div>
     </article>
 </div>
 
+  <aside class="toc">
+    <div class="toc-title">目录</div>
+<div id="toc"></div>
+
+  </aside>
 </div>
 
         </main>

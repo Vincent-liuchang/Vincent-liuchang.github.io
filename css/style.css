@@ -12,6 +12,13 @@ body {
   display: flex;
   align-items: flex-start;
 }
+.post-container {
+  font-family: "San Francisco", Helvetica, Arial, sans-serif;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+}
 topTerminal {
   position: relative;
   margin: 20px;
@@ -207,24 +214,28 @@ header .menu .menu-item-link:hover {
   margin-top: 5%;
   flex: 66.67%;
 }
-.archive .archive-title {
+.archive-title {
   margin-left: 20px;
   font-size: 1.5em;
-  font-family: "San Francisco", Helvetica, Arial, sans-serif;
 }
-.archive .post-archive {
+.archive-number {
+  margin-left: 20px;
+  font-size: 0.8em;
+  color: #6e6e6e;
+}
+.post-archive {
   list-style: none;
 }
-.archive .catelist {
+.catelist {
   margin-top: 5%;
 }
-.archive .catelist a {
+.catelist a {
   margin-left: 20px;
   font-size: 1.5em;
   color: #6e6e6e;
   text-decoration: none;
 }
-.archive .catelist a:hover {
+.catelist a:hover {
   color: #060;
   text-decoration: underline;
 }
@@ -236,20 +247,67 @@ header .menu .menu-item-link:hover {
   flex: 33.33%;
   text-align: right;
 }
+.widget {
+  width: 50%;
+  margin-left: auto;
+  margin-right: 0;
+}
 .title {
   font-size: 1em;
 }
 .content {
   margin-top: 2%;
+  font-size: 0.8em;
 }
 .content a {
-  color: #6e6e6e;
+  color: #060;
   text-decoration: none;
 }
 .content a:hover {
-  color: #060;
+  color: #6e6e6e;
   text-decoration: underline;
 }
 ul {
   list-style-type: none;
+}
+aside {
+  flex: 33.33%;
+  margin: 10% auto;
+  margin-left: 10px;
+}
+aside ul {
+  list-style-type: none;
+  margin-left: -30px;
+}
+.toc-title {
+  position: fixed;
+}
+#toc {
+  margin-top: 20px;
+  position: fixed;
+  font-size: 0.6em;
+}
+#toc a.read {
+  color: #000;
+  border-bottom: 0;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+}
+#toc a {
+  color: #6e6e6e;
+  border-bottom: 0;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+}
+#toc a:hover {
+  color: #060;
+  padding-left: 5px;
+  -webkit-transition: 0.1s;
+  -moz-transition: 0.1s;
+  -ms-transition: 0.1s;
+  -o-transition: 0.1s;
 }
