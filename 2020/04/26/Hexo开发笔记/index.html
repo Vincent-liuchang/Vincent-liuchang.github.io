@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <title>Vin Blog</title>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/highlight/styles/atom-one-dark.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  <body>
+    <header class="header">
+<div class ="topBar">
+  <div class="blog-title">
+    <a>🐻</a>
+    <a href="/" class="logo">Vin Blog</a>
+    <span class = "description">一个记录生活学习和工作的地方</span>
+  </div>
+  <nav class="navBar">
+    <ul class="menu">
+      <li class="menu-item">
+        <a href="/" class="menu-item-link">Home</a>
+      </li>
+      <li class="menu-item">
+        <a href="/archives" class="menu-item-link">Archive</a>
+      </li>
+      <li class="menu-item">
+        <a href="/categories" class="menu-item-link">Category</a>
+      </li>
+      <li class="menu-item">
+        <a href="/about" class="menu-item-link">About</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+</header>
+
+        <main class="main">
+            <div class="container">
+  <div class="postBox">
+    <article class="post">
+      <div class="post-title">
+        <div class="post-title">
+          <a>Hexo开发笔记</a>
+        </div>
+      </div>
+      <div class="post-meta">
+        <post-meta>
+    <span class="post-time">26-04-2020</span>
+
+    <span class="post-meta-item post-meta-categories">
+        /
+        
+        <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+        
+    </span>
+
+    <span class="post-meta-item post-meta-tags">
+        /
+        
+        <a class="tag-link" href="/tags/Hexo/" rel="tag">#HEXO</a>
+        
+    </span>
+</post-meta>
+
+        <span id="busuanzi_container_page_pv">
+          / <span id="busuanzi_value_page_pv"></span> views
+        </span>
+      </div>
+      <div class="post-content">
+        <p>自己开发一个HEXO可能会踩到的坑<br> <a id="more"></a></p>
+<h1 id="将本地变量传递到局部中去"><a href="#将本地变量传递到局部中去" class="headerlink" title="将本地变量传递到局部中去"></a>将本地变量传递到局部中去</h1><p>使用情景：在主页的文章列表中显示文章的分类和标签信息。因为post-meta在很多的页面都会用到，所以想要分离出来。</p>
+<p>遇到的问题：post对象需要在post-meta外部通过遍历site.posts来获得,但是需要在post-meta内部调用获得具体value。</p>
+<p>解决方式：将post对象传递到post-meta中，就可以在post-meta中直接调用。</p>
+<pre><code class="javascript">&lt;!--index.ejs--&gt;
+&lt;%- partial(&#39;_partial/post-meta&#39;,{post: post}) %&gt;</code></pre>
+<p>在<a href="url'https://ngudream.com/2016/07/09/hexo-advanced/'">这篇博客</a>中有更加详细的说明和介绍。</p>
+<h1 id="创建一个显示所有分类-标签的页面"><a href="#创建一个显示所有分类-标签的页面" class="headerlink" title="创建一个显示所有分类/标签的页面"></a>创建一个显示所有分类/标签的页面</h1><p>主题中原有的<code>category.ejs</code>和<code>tag.ejs</code>文件都是属于单个对象的页面。<br>Hexo内置会创建页面显示某个<code>categories</code>下的所有文章，<code>tag</code>同理.</p>
+<p>e.g. <code>categories/technique.html</code></p>
+<p>但不会像<code>archive</code>一样自动创建一个<code>categories/index.html.</code><br>使用其他主题的时候,同样<code>categories</code>，<code>tags</code>需要在根目录<code>source</code>文件夹下面创一个对应的文件夹，再创建一个<code>index.md</code>，Hexo 里面没有预置。</p>
+<p>解决方式:</p>
+<ol>
+<li>Hexo new page categories<br><code>source/categories/index.md</code>修改<code>type:&quot;categories&quot;</code></li>
+<li><code>layout/_partial</code>中创建<code>categories.ejs</code><pre><code class="javascript">&lt;div class=&quot;container&quot;&gt;
+&lt;div class=&quot;archive&quot;&gt;
+   &lt;div class=&quot;archive-title&quot;&gt;分类&lt;/div&gt;
+   &lt;div class=&quot;catelist&quot;&gt;
+       &lt;% site.categories.each(function(category) { %&gt;
+          &lt;div&gt;&lt;a href=&quot;&lt;%- url_for(category.path) %&gt;&quot;&gt;&lt;%= category.name%&gt;&lt;/a&gt;&lt;/div&gt;
+       &lt;% }); %&gt;
+   &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</li>
+<li>在<code>page.ejs</code>中判断<pre><code class="javascript">&lt;% if (is_page() &amp;&amp; page.type === &#39;tags&#39;) { %&gt;
+ &lt;%- partial(&#39;_partial/tags&#39;) %&gt;
+&lt;% }else if(is_page() &amp;&amp; page.type === &#39;categories&#39;){%&gt;
+ &lt;%- partial(&#39;_partial/categories&#39;) %&gt;
+ &lt;% }else if(is_page() &amp;&amp; page.type === &#39;about&#39;){%&gt;
+     &lt;%- partial(&#39;_partial/about&#39;) %&gt;
+&lt;% }else{%&gt;
+ &lt;%- partial(&#39;_partial/article&#39;) %&gt;
+&lt;% } %&gt;</code></pre>
+</li>
+</ol>
+<p>自己第一次做的时候走了非常多的弯路，看了半天hexo文档也没搞清楚，最后看到了<a href="url'https://ngudream.com/2016/07/09/hexo-advanced/'">这篇博客</a>，解决了问题，感谢博主的记录和分享。</p>
+
+      </div>
+    </article>
+</div>
+
+</div>
+
+        </main>
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/js/1.js"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<script src="/highlight/highlight.pack.js"></script>
+
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>

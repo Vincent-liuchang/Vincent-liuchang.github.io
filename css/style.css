@@ -78,9 +78,14 @@ topTerminal .text-body {
 .posts .post:first-child {
   margin-top: 0;
 }
-.post {
+.postBox {
+  margin-top: 5%;
   flex: 66.67%;
+}
+.post {
+  margin-top: 10px;
   margin-left: 20px;
+  flex-wrap: wrap;
   font-family: "San Francisco", Helvetica, Arial, sans-serif;
   border-bottom: 1px solid #eee;
   border-bottom-width: 1px;
@@ -119,10 +124,21 @@ topTerminal .text-body {
   color: #060;
   text-decoration: underline;
 }
-.post .post-content a {
-  font-size: 1.5em;
-  color: #000;
+.post .post-excerpt {
+  margin-top: 0;
+  font-size: 0.8em;
+  color: #6e6e6e;
   text-decoration: none;
+}
+.post .post-content {
+  font-size: 0.8em;
+}
+.post .post-content a {
+  color: #060;
+  text-decoration: none;
+}
+.post .post-content a:hover {
+  text-decoration: underline;
 }
 header {
   padding: 2em 0;
@@ -223,5 +239,5 @@ header .menu .menu-item-link:hover {
   text-decoration: underline;
 }
 ul {
-  list-style-type: "";
+  list-style-type: none;
 }
