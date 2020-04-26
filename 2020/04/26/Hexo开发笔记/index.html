@@ -16,7 +16,8 @@
     <header class="header">
 <div class ="topBar">
   <div class="blog-title">
-    <a>🐻</a>
+    <a class="beer">🐻</a>
+    <a class="rabbit">🐰</a>
     <a href="/" class="logo">Vin Blog</a>
     <span class = "description">一个记录生活学习和工作的地方</span>
   </div>
@@ -72,7 +73,7 @@
         </span>
       </div>
       <div class="post-content">
-        <p>自己开发一个HEXO可能会踩到的坑<br> <a id="more"></a></p>
+        <p>自己开发一个HEXO主题可能会踩到的坑<br> <a id="more"></a></p>
 <h1 id="将本地变量传递到局部中去"><a href="#将本地变量传递到局部中去" class="headerlink" title="将本地变量传递到局部中去"></a>将本地变量传递到局部中去</h1><p>使用情景：在主页的文章列表中显示文章的分类和标签信息。因为post-meta在很多的页面都会用到，所以想要分离出来。</p>
 <p>遇到的问题：post对象需要在post-meta外部通过遍历site.posts来获得,但是需要在post-meta内部调用获得具体value。</p>
 <p>解决方式：将post对象传递到post-meta中，就可以在post-meta中直接调用。</p>
@@ -84,7 +85,7 @@
 <p>但不会像<code>archive</code>一样自动创建一个<code>categories/index.html.</code><br>使用其他主题的时候,同样<code>categories</code>，<code>tags</code>需要在根目录<code>source</code>文件夹下面创一个对应的文件夹，再创建一个<code>index.md</code>，Hexo 里面没有预置。</p>
 <p>解决方式:</p>
 <ol>
-<li><code>$ Hexo new page categories</code><br><code>source/categories/index.md</code>修改<code>type:&quot;categories&quot;</code></li>
+<li>命令行输入<code>$ Hexo new page categories</code><br><code>source/categories/index.md</code>修改<code>type:&quot;categories&quot;</code></li>
 <li><code>layout/_partial</code>中创建<code>categories.ejs</code><pre><code class="javascript">&lt;div class=&quot;container&quot;&gt;
 &lt;div class=&quot;archive&quot;&gt;
    &lt;div class=&quot;archive-title&quot;&gt;分类&lt;/div&gt;

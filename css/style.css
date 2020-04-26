@@ -163,8 +163,15 @@ header .topBar {
   justify-content: space-between;
   transition: 0.8s;
 }
-header .blog-title a {
-  margin-left: 20px;
+header .blog-title .beer {
+  margin-left: 30px;
+}
+header .blog-title .beer:hover +.rabbit {
+  visibility: visible;
+}
+header .blog-title .rabbit {
+  visibility: hidden;
+  margin-left: -10px;
 }
 header .blog-title span {
   margin-left: 20px;
@@ -173,7 +180,7 @@ header .blog-title span {
 header .blog-title .logo {
   color: #000;
   padding: 2px;
-  margin-left: 20px;
+  margin-left: 5px;
   font-size: 2em;
   font-family: "San Francisco", Helvetica, Arial, sans-serif;
   font-weight: bold;
