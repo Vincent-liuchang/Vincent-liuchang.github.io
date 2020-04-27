@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <title>Vin Blog</title>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/highlight/styles/atom-one-dark.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  <body>
+    <header class="header">
+<div class ="topBar">
+  <div class="blog-title">
+    <a class="beer">🐻</a>
+    <a class="rabbit">🐰</a>
+    <a href="/" class="logo">Vin Blog</a>
+    <span class = "description">一个记录生活学习和工作的地方</span>
+  </div>
+  <nav class="navBar">
+    <ul class="menu">
+      <li class="menu-item">
+        <a href="/" class="menu-item-link">Home</a>
+      </li>
+      <li class="menu-item">
+        <a href="/archives" class="menu-item-link">Archive</a>
+      </li>
+      <li class="menu-item">
+        <a href="/categories" class="menu-item-link">Category</a>
+      </li>
+      <li class="menu-item">
+        <a href="/about" class="menu-item-link">About</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+</header>
+
+        <main class="main">
+            <div class="post-container">
+    <div class="postBox">
+    <article class="post">
+      <div class="post-title">
+        <div class="post-title">
+          <a>Java基础总结</a>
+        </div>
+      </div>
+      <div class="post-meta">
+        <post-meta>
+    <span class="post-time">22-12-2019</span>
+
+    <span class="post-meta-item post-meta-categories">
+        /
+        
+        <a class="category-link" href="/categories/%E5%9F%BA%E7%A1%80/">基础</a>
+        
+    </span>
+
+    <span class="post-meta-item post-meta-tags">
+        /
+        
+        <a class="tag-link" href="/tags/Java/" rel="tag">#JAVA</a>, <a class="tag-link" href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" rel="tag">#知识点</a>
+        
+    </span>
+</post-meta>
+
+        <span id="busuanzi_container_page_pv">
+          / <span id="busuanzi_value_page_pv"></span> views
+        </span>
+      </div>
+      <div class="post-content" id ="post-content">
+        <p>找工作期间的复习笔记之Java基础，部分来源于网络.<br> <a id="more"></a></p>
+<h1 id="JAVA基础"><a href="#JAVA基础" class="headerlink" title="JAVA基础"></a>JAVA基础</h1><h2 id="反编译指令"><a href="#反编译指令" class="headerlink" title="反编译指令:"></a>反编译指令:</h2><p><code>javap -verbose</code></p>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h3><pre><code>    byte/8
+    char/16
+    short/16
+    int/32
+    float/32
+    long/64
+    double/64
+    boolean/~</code></pre><h3 id="包装类型"><a href="#包装类型" class="headerlink" title="包装类型"></a>包装类型</h3><pre><code>Integer.valueOf(2)
+X.intValue()</code></pre><ul>
+<li>装箱和拆箱, AutoBoxing and Unboxing</li>
+</ul>
+<h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><h4 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h4><ol>
+<li>final类 不可被继承 (包装类都不能被继承)</li>
+<li>JAVA8 内部使用char数组存储数据</li>
+<li>JAVA9 开始改用byte数组存储字符串 用coder来标示使用哪种编码</li>
+<li>byte数组是final的, String内部也没有改变的方法, 因此可以保证String不可变</li>
+<li>不可变的好处<ul>
+<li>可以缓存hash值</li>
+<li>可以使得String Pool得以实现</li>
+<li>安全性</li>
+<li>线程安全</li>
+</ul>
+</li>
+</ol>
+<h3 id="String-StringBuffer-StringBuilder"><a href="#String-StringBuffer-StringBuilder" class="headerlink" title="String, StringBuffer, StringBuilder"></a>String, StringBuffer, StringBuilder</h3><ol>
+<li>string 不可变,线程安全</li>
+<li>StringBuilder可变，不是线程安全的</li>
+<li>StringBuffer可变，是线程安全的,内部使用synchronised进行同步</li>
+</ol>
+<h3 id="String-Pool和intern"><a href="#String-Pool和intern" class="headerlink" title="String Pool和intern()"></a>String Pool和intern()</h3><ol>
+<li>intern()返回string在StringPool中的引用</li>
+<li>StringPool存在JVM堆中</li>
+</ol>
+<h2 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h2><h3 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h3><p>Java的参数是以值传递的形式传入方法中,而不是引用传递</p>
+<h3 id="隐式向下转型"><a href="#隐式向下转型" class="headerlink" title="隐式向下转型"></a>隐式向下转型</h3><p>Java不支持精度降低的隐式向下转型</p>
+<h3 id="隐式类型转换"><a href="#隐式类型转换" class="headerlink" title="隐式类型转换"></a>隐式类型转换</h3><p>使用+= 或者++运算可以实现隐式类型转换</p>
+<h3 id="Switch"><a href="#Switch" class="headerlink" title="Switch"></a>Switch</h3><ul>
+<li>从JAVA7开始支持 String,但是不支持 long</li>
+<li>int 是肯定支持啦</li>
+</ul>
+<h2 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h2><h3 id="final"><a href="#final" class="headerlink" title="final"></a>final</h3><ol>
+<li>数据<ul>
+<li>声明数据为常量，可以是编译时常量，也可以是在运行时被初始化后不能被改变的常量。</li>
+<li>对于基本类型，final 使数值不变；</li>
+<li>对于引用类型，final 使不能引用其它对象，但是被引用的对象本身是可以修改的。</li>
+</ul>
+</li>
+<li>方法<ul>
+<li>声明方法不能被子类重写。</li>
+<li>private 方法隐式地被指定为 final, 如果在子类中定义的方法和基类中的一个 private 方法签名相同，此时子类的方法不是重写基类方法，而是在子类中定义了一个新的方法。</li>
+</ul>
+</li>
+<li>类<ul>
+<li>声明类不允许被继承<h3 id="static"><a href="#static" class="headerlink" title="static"></a>static</h3></li>
+</ul>
+</li>
+<li>静态变量<ul>
+<li>又称类变量,属于该类,类的所有实例共享,在内存中只存在一份,通过类名来访问</li>
+</ul>
+</li>
+<li>静态方法<ul>
+<li>在类加载的时候就存在了,不依赖任何实例,所以必须有实现,不能是抽象方法</li>
+<li>静态方法只能访问所属类的静态变量和静态方法</li>
+</ul>
+</li>
+<li>静态内部类<pre><code>初始化顺序
+父类（静态变量、静态语句块）
+ 子类（静态变量、静态语句块）
+ 父类（实例变量、普通语句块）
+ 父类（构造函数）
+ 子类（实例变量、普通语句块）
+ 子类（构造函数）</code></pre></li>
+</ol>
+<h3 id="Object的方法"><a href="#Object的方法" class="headerlink" title="Object的方法"></a>Object的方法</h3><ol>
+<li>equal<ul>
+<li>== 判断地址</li>
+<li>equal 判断是否等价</li>
+<li>hashcode</li>
+</ul>
+</li>
+<li>clone<ul>
+<li>必须实现接口 cloneable</li>
+<li>object 的 protected 必须重写才能调用</li>
+</ul>
+</li>
+</ol>
+<h3 id="浅拷贝和深拷贝之分"><a href="#浅拷贝和深拷贝之分" class="headerlink" title="浅拷贝和深拷贝之分"></a>浅拷贝和深拷贝之分</h3><pre><code>浅拷贝复制一个对象引用相同地址
+深拷贝复制一个对象引用不同地址
+clone的替代方案是创建克隆构造函数或者拷贝工厂</code></pre><h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><h3 id="访问权限-封装"><a href="#访问权限-封装" class="headerlink" title="访问权限, 封装"></a>访问权限, 封装</h3><p>三个访问权限修饰符：private、protected 以及 public，如果不加,默认protected</p>
+<h3 id="抽象类与接口"><a href="#抽象类与接口" class="headerlink" title="抽象类与接口"></a>抽象类与接口</h3><ol>
+<li>抽象类<ul>
+<li>有抽象方法必然是抽象类, 可以有非抽象方法</li>
+<li>抽象类不能被实例化只能被继承</li>
+</ul>
+</li>
+<li>接口<ul>
+<li>接口从Java8开始,可以有方法实现</li>
+<li>接口的成员默认都是public的,并且不允许定义为private或者protected</li>
+<li>接口的字段默认都是static和final的</li>
+</ul>
+</li>
+<li>比较<ul>
+<li>一个类可以实现多个接口,但是不能继承多个类</li>
+<li>接口的字段只能是static和final类型的, 抽象类无限制</li>
+<li>接口的成员只能是public的,而抽象类的成员可以有很多种访问权限</li>
+</ul>
+</li>
+<li>使用选择<ul>
+<li>使用接口：<ul>
+<li>需要让不相关的类都实现一个方法，例如不相关的类都可以实现 Compareable 接口中的 compareTo() 方法；</li>
+<li>需要使用多重继承。</li>
+</ul>
+</li>
+<li>使用抽象类：<ul>
+<li>需要在几个相关的类中共享代码。</li>
+<li>需要能控制继承来的成员的访问权限，而不是都为 public。</li>
+<li>需要继承非静态和非常量字段。</li>
+<li>在很多情况下，接口优先于抽象类。因为接口没有抽象类严格的类层次结构要求，可以灵活地为一个类添加行为。并且从 Java 8 开始，接口也可以有默认的方法实现，使得修改接口的成本也变的很低。</li>
+<li>super调用父类</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="多态-重写和重载"><a href="#多态-重写和重载" class="headerlink" title="多态: 重写和重载"></a>多态: 重写和重载</h2><ol>
+<li>重写（Override）<ul>
+<li>存在于继承体系中，指子类实现了一个与父类在方法声明上完全相同的一个方法。</li>
+<li>为了满足里式替换原则，重写有以下三个限制：<ul>
+<li>子类方法的访问权限必须大于等于父类方法；</li>
+<li>子类方法的返回类型必须是父类方法返回类型或为其子类型。</li>
+<li>子类方法抛出的异常类型必须是父类抛出异常类型或为其子类型。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>重载（Overload）<ul>
+<li>存在于同一个类中，指一个方法与已经存在的方法名称上相同，但是参数类型、个数、顺序至少有一个不同。</li>
+<li>应该注意的是，返回值不同，其它都相同不算是重载。</li>
+<li>使用 <code>@Override</code> 注解，可以让编译器帮忙检查是否满足上面的三个限制条件</li>
+</ul>
+</li>
+</ol>
+
+      </div>
+    </article>
+</div>
+
+  <aside class="toc">
+    <div id="toc"></div>
+
+  </aside>
+</div>
+
+        </main>
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<script src="/highlight/highlight.pack.js"></script>
+
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/javascript" src="/js/1.js"></script>
+  </body>
+</html>

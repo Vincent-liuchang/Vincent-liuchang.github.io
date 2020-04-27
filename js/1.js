@@ -3,6 +3,16 @@
 //   $(".down").toggleClass("blacken");
 // });
 
+$(function() {
+var elm = $('aside #toc');
+var startPos = $(elm).offset().top;
+$.event.add(window, "scroll", function() {
+    var p = $(window).scrollTop();
+    $(elm).css('position',((p) > startPos) ? 'fixed' : 'absolute'); //如果当前页面的顶部位置大于目标元素的顶部位置，那么目标元素的position属性为fixed，否则为absolute
+    $(elm).css('top',((p) > startPos) ? '0px' : '');
+});
+});
+
 // 以下代码段来源是https://www.cnblogs.com/yyhh/p/11058985.html
 // 实在是想偷个懒，仔细阅读理解了这段代码，写的挺好的，直接拷贝大法。
 // 为作者点赞。
@@ -48,8 +58,7 @@ $(document).ready(function () {
 
   // 最后组合成 div 方便 css 设计样式，添加到指定位置
     $("aside #toc").empty();
-    // $("aside #toc").append(show(h1List));
-    $("aside #toc").append(show(h1List));
+    $("aside #toc").append("<h1>目录</h1>"+show(h1List));
 
     // 点击目录索引链接，动画跳转过去，不是默认闪现过去
     $("#toc a").on("click", function(e){
