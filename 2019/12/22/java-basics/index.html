@@ -74,74 +74,71 @@
       </div>
       <div class="post-content" id ="post-content">
         <p>找工作期间的复习笔记之Java基础，部分来源于网络.<br> <a id="more"></a></p>
-<h1 id="JAVA基础"><a href="#JAVA基础" class="headerlink" title="JAVA基础"></a>JAVA基础</h1><h2 id="反编译指令"><a href="#反编译指令" class="headerlink" title="反编译指令:"></a>反编译指令:</h2><p><code>javap -verbose</code></p>
-<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h3><pre><code>    byte/8
+<h1 id="反编译指令"><a href="#反编译指令" class="headerlink" title="反编译指令:"></a>反编译指令:</h1><p><code>javap -verbose</code></p>
+<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><h2 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h2><pre><code>    byte/8
     char/16
     short/16
     int/32
     float/32
     long/64
     double/64
-    boolean/~</code></pre><h3 id="包装类型"><a href="#包装类型" class="headerlink" title="包装类型"></a>包装类型</h3><pre><code>Integer.valueOf(2)
-X.intValue()</code></pre><ul>
-<li>装箱和拆箱, AutoBoxing and Unboxing</li>
-</ul>
-<h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><h4 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h4><ol>
+    boolean/~</code></pre><h2 id="包装类型"><a href="#包装类型" class="headerlink" title="包装类型"></a>包装类型</h2><pre><code>Integer.valueOf(2)
+X.intValue()</code></pre><p>装箱和拆箱, AutoBoxing and Unboxing</p>
+<h1 id="String"><a href="#String" class="headerlink" title="String"></a>String</h1><h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><ol>
 <li>final类 不可被继承 (包装类都不能被继承)</li>
 <li>JAVA8 内部使用char数组存储数据</li>
 <li>JAVA9 开始改用byte数组存储字符串 用coder来标示使用哪种编码</li>
 <li>byte数组是final的, String内部也没有改变的方法, 因此可以保证String不可变</li>
-<li>不可变的好处<ul>
-<li>可以缓存hash值</li>
-<li>可以使得String Pool得以实现</li>
-<li>安全性</li>
-<li>线程安全</li>
-</ul>
-</li>
+<li>不可变的好处<br>可以缓存hash值<br>可以使得String Pool得以实现<br>安全性<br>线程安全</li>
 </ol>
-<h3 id="String-StringBuffer-StringBuilder"><a href="#String-StringBuffer-StringBuilder" class="headerlink" title="String, StringBuffer, StringBuilder"></a>String, StringBuffer, StringBuilder</h3><ol>
+<h2 id="String-StringBuffer-StringBuilder"><a href="#String-StringBuffer-StringBuilder" class="headerlink" title="String, StringBuffer, StringBuilder"></a>String, StringBuffer, StringBuilder</h2><ol>
 <li>string 不可变,线程安全</li>
 <li>StringBuilder可变，不是线程安全的</li>
 <li>StringBuffer可变，是线程安全的,内部使用synchronised进行同步</li>
 </ol>
-<h3 id="String-Pool和intern"><a href="#String-Pool和intern" class="headerlink" title="String Pool和intern()"></a>String Pool和intern()</h3><ol>
+<h2 id="String-Pool和intern"><a href="#String-Pool和intern" class="headerlink" title="String Pool和intern()"></a>String Pool和intern()</h2><ol>
 <li>intern()返回string在StringPool中的引用</li>
 <li>StringPool存在JVM堆中</li>
 </ol>
-<h2 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h2><h3 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h3><p>Java的参数是以值传递的形式传入方法中,而不是引用传递</p>
-<h3 id="隐式向下转型"><a href="#隐式向下转型" class="headerlink" title="隐式向下转型"></a>隐式向下转型</h3><p>Java不支持精度降低的隐式向下转型</p>
-<h3 id="隐式类型转换"><a href="#隐式类型转换" class="headerlink" title="隐式类型转换"></a>隐式类型转换</h3><p>使用+= 或者++运算可以实现隐式类型转换</p>
-<h3 id="Switch"><a href="#Switch" class="headerlink" title="Switch"></a>Switch</h3><ul>
-<li>从JAVA7开始支持 String,但是不支持 long</li>
-<li>int 是肯定支持啦</li>
-</ul>
-<h2 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h2><h3 id="final"><a href="#final" class="headerlink" title="final"></a>final</h3><ol>
-<li>数据<ul>
+<h1 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h1><h2 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h2><p>Java的参数是以值传递的形式传入方法中,而不是引用传递</p>
+<h2 id="隐式向下转型"><a href="#隐式向下转型" class="headerlink" title="隐式向下转型"></a>隐式向下转型</h2><p>Java不支持精度降低的隐式向下转型</p>
+<h2 id="隐式类型转换"><a href="#隐式类型转换" class="headerlink" title="隐式类型转换"></a>隐式类型转换</h2><p>使用+= 或者++运算可以实现隐式类型转换</p>
+<h2 id="Switch"><a href="#Switch" class="headerlink" title="Switch"></a>Switch</h2><p>从JAVA7开始支持 String,但是不支持 long<br>int 是肯定支持啦</p>
+<h1 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h1><h2 id="final"><a href="#final" class="headerlink" title="final"></a>final</h2><ol>
+<li>数据</li>
+</ol>
+<ul>
 <li>声明数据为常量，可以是编译时常量，也可以是在运行时被初始化后不能被改变的常量。</li>
 <li>对于基本类型，final 使数值不变；</li>
 <li>对于引用类型，final 使不能引用其它对象，但是被引用的对象本身是可以修改的。</li>
 </ul>
-</li>
-<li>方法<ul>
+<ol start="2">
+<li>方法</li>
+</ol>
+<ul>
 <li>声明方法不能被子类重写。</li>
 <li>private 方法隐式地被指定为 final, 如果在子类中定义的方法和基类中的一个 private 方法签名相同，此时子类的方法不是重写基类方法，而是在子类中定义了一个新的方法。</li>
 </ul>
-</li>
-<li>类<ul>
+<ol start="3">
+<li>类</li>
+</ol>
+<ul>
 <li>声明类不允许被继承</li>
 </ul>
-</li>
+<h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><ol>
+<li>静态变量</li>
 </ol>
-<h3 id="static"><a href="#static" class="headerlink" title="static"></a>static</h3><ol>
-<li>静态变量<ul>
+<ul>
 <li>又称类变量,属于该类,类的所有实例共享,在内存中只存在一份,通过类名来访问</li>
 </ul>
-</li>
-<li>静态方法<ul>
+<ol start="2">
+<li>静态方法</li>
+</ol>
+<ul>
 <li>在类加载的时候就存在了,不依赖任何实例,所以必须有实现,不能是抽象方法</li>
 <li>静态方法只能访问所属类的静态变量和静态方法</li>
 </ul>
-</li>
+<ol start="3">
 <li>静态内部类<pre><code>初始化顺序
 父类（静态变量、静态语句块）
  子类（静态变量、静态语句块）
@@ -150,23 +147,27 @@ X.intValue()</code></pre><ul>
  子类（实例变量、普通语句块）
  子类（构造函数）</code></pre></li>
 </ol>
-<h3 id="Object的方法"><a href="#Object的方法" class="headerlink" title="Object的方法"></a>Object的方法</h3><ol>
-<li>equal<ul>
+<h1 id="Object的方法"><a href="#Object的方法" class="headerlink" title="Object的方法"></a>Object的方法</h1><ol>
+<li>equal</li>
+</ol>
+<ul>
 <li>== 判断地址</li>
-<li>equal 判断是否等价</li>
 <li>hashcode</li>
 </ul>
-</li>
-<li>clone<ul>
+<ol start="2">
+<li>clone</li>
+</ol>
+<ul>
 <li>必须实现接口 cloneable</li>
 <li>object 的 protected 必须重写才能调用</li>
 </ul>
-</li>
-</ol>
-<h3 id="浅拷贝和深拷贝之分"><a href="#浅拷贝和深拷贝之分" class="headerlink" title="浅拷贝和深拷贝之分"></a>浅拷贝和深拷贝之分</h3><pre><code>浅拷贝复制一个对象引用相同地址
-深拷贝复制一个对象引用不同地址
-clone的替代方案是创建克隆构造函数或者拷贝工厂</code></pre><h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><h3 id="访问权限-封装"><a href="#访问权限-封装" class="headerlink" title="访问权限, 封装"></a>访问权限, 封装</h3><p>三个访问权限修饰符：private、protected 以及 public，如果不加,默认protected</p>
-<h3 id="抽象类与接口"><a href="#抽象类与接口" class="headerlink" title="抽象类与接口"></a>抽象类与接口</h3><ol>
+<h2 id="浅拷贝和深拷贝之分"><a href="#浅拷贝和深拷贝之分" class="headerlink" title="浅拷贝和深拷贝之分"></a>浅拷贝和深拷贝之分</h2><ul>
+<li>浅拷贝复制一个对象引用相同地址</li>
+<li>深拷贝复制一个对象引用不同地址</li>
+<li>clone的替代方案是创建克隆构造函数或者拷贝工厂</li>
+</ul>
+<h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><h2 id="访问权限-封装"><a href="#访问权限-封装" class="headerlink" title="访问权限, 封装"></a>访问权限, 封装</h2><p>三个访问权限修饰符：private、protected 以及 public，如果不加,默认protected</p>
+<h2 id="抽象类与接口"><a href="#抽象类与接口" class="headerlink" title="抽象类与接口"></a>抽象类与接口</h2><ol>
 <li>抽象类<ul>
 <li>有抽象方法必然是抽象类, 可以有非抽象方法</li>
 <li>抽象类不能被实例化只能被继承</li>
@@ -201,7 +202,7 @@ clone的替代方案是创建克隆构造函数或者拷贝工厂</code></pre><h
 </ul>
 </li>
 </ol>
-<h2 id="多态-重写和重载"><a href="#多态-重写和重载" class="headerlink" title="多态: 重写和重载"></a>多态: 重写和重载</h2><ol>
+<h1 id="多态-重写和重载"><a href="#多态-重写和重载" class="headerlink" title="多态: 重写和重载"></a>多态: 重写和重载</h1><ol>
 <li>重写（Override）<ul>
 <li>存在于继承体系中，指子类实现了一个与父类在方法声明上完全相同的一个方法。</li>
 <li>为了满足里式替换原则，重写有以下三个限制：<ul>

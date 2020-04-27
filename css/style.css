@@ -145,6 +145,15 @@ topTerminal .text-body {
 .post .post-content a:hover {
   text-decoration: underline;
 }
+.post .post-content h1:hover:before {
+  content: '#';
+}
+.post .post-content h2 {
+  font-size: 1.2em;
+}
+.post .post-content h3 {
+  font-size: 1em;
+}
 header {
   padding: 2em 0;
   border-bottom: 1px solid #eee;
