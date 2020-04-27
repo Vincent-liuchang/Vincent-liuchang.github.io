@@ -12,13 +12,6 @@ body {
   display: flex;
   align-items: flex-start;
 }
-.post-container {
-  font-family: "San Francisco", Helvetica, Arial, sans-serif;
-  max-width: 1000px;
-  margin: 0 auto;
-  display: flex;
-  align-items: flex-start;
-}
 topTerminal {
   position: relative;
   margin: 20px;
