@@ -254,9 +254,9 @@ header .menu .menu-item-link:hover {
 }
 .content {
   margin-top: 2%;
-  font-size: 0.8em;
 }
 .content a {
+  font-size: 0.8em;
   color: #060;
   text-decoration: none;
 }
@@ -276,16 +276,13 @@ aside ul {
   list-style-type: none;
   margin-left: -30px;
 }
-#toc-title {
-  position: fixed;
-}
 #toc {
   margin-top: 20px;
   position: fixed;
   font-size: 0.6em;
 }
 #toc a.read {
-  color: #000;
+  color: #6e6e6e;
   border-bottom: 0;
   -webkit-transition: 0.5s;
   -moz-transition: 0.5s;
@@ -293,15 +290,16 @@ aside ul {
   -o-transition: 0.5s;
 }
 #toc a {
-  color: #6e6e6e;
+  color: #060;
   border-bottom: 0;
+  text-decoration: none;
   -webkit-transition: 0.2s;
   -moz-transition: 0.2s;
   -ms-transition: 0.2s;
   -o-transition: 0.2s;
 }
 #toc a:hover {
-  color: #060;
+  color: #000;
   padding-left: 5px;
   -webkit-transition: 0.1s;
   -moz-transition: 0.1s;
