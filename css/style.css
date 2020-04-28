@@ -253,7 +253,6 @@ header .menu .menu-item-link:hover {
 }
 ion-icon:hover {
   color: #060;
-  text-decoration: underline;
 }
 .widget {
   margin-top: 5%;
