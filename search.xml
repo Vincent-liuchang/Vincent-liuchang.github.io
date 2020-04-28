@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>Hexo开发笔记</title>
+      <link href="/2020/04/26/Hexo%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+      <url>/2020/04/26/Hexo%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/</url>
+      
+        <content type="html"><![CDATA[<p>自己开发一个HEXO主题可能会踩到的坑. 模版引擎-ejs, CSS预处理-stylus.<br> <a id="more"></a></p><h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>之前在用别人的主题，觉得不够有趣，缺乏掌控感，就想自己做一个比较简单的主题。参考了一众大佬的主题，很多大佬的博客已经写的很详尽了，在初期，我是依靠着 <a href="https://www.ahonn.me/blog/create-a-hexo-theme-from-scratch" target="_blank" rel="noopener">AHONN’S BLOG–从零开始制作 Hexo 主题</a> 慢慢摸索开始的。在这里仅记录一些我纠结过踩过坑的地方。</p><h1 id="Hexo变量"><a href="#Hexo变量" class="headerlink" title="Hexo变量"></a>Hexo变量</h1><h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><p>具体的变量常用的官方文档里都有了，就不多说了。我在学习过程中，主要是forEach那个地方花过一段时间。针对<code>list_categories</code>,<code>list_posts</code>举两个具体的例子。</p><pre><code class="javascript">&lt;!--cateList.ejs--&gt;&lt;% site.categories.each(function(category) { %&gt;   &lt;li&gt;&lt;a href=&quot;&lt;%- url_for(category.path) %&gt;&quot;&gt;·&lt;%= category.name%&gt;&lt;/a&gt;&lt;/li&gt;&lt;% }); %&gt;&lt;!--index.ejs--&gt;&lt;section class = &quot;posts&quot;&gt;    &lt;% page.posts.each(function (post) { %&gt;      &lt;article class=&quot;post&quot;&gt;        &lt;div class=&quot;post-title&quot;&gt;          &lt;a class=&quot;post-title-link&quot; href=&quot;&lt;%- url_for(post.path) %&gt;&quot;&gt;&lt;%= post.title %&gt;&lt;/a&gt;        &lt;/div&gt;        &lt;div class=&quot;post-meta&quot;&gt;            &lt;%- partial(&#39;_partial/post-meta&#39;,{post: post}) %&gt;        &lt;/div&gt;        &lt;div class=&quot;post-excerpt&quot;&gt;          &lt;%- post.excerpt %&gt;        &lt;/div&gt;      &lt;/article&gt;    &lt;% }) %&gt;&lt;/section&gt;</code></pre><p>第一个是用来显示所有的分类的，每一个分类创建列表中的一行。<br>第二个是用来显示博客内所有文章的。<br>都不难理解，但自己写的时候经常犯错。(我对前端的技术全都是摸着石头过河)</p><h2 id="将本地变量传递到局部中去"><a href="#将本地变量传递到局部中去" class="headerlink" title="将本地变量传递到局部中去"></a>将本地变量传递到局部中去</h2><p>使用情景：在主页的文章列表中显示文章的分类和标签信息。因为post-meta在很多的页面都会用到，所以想要分离出来。</p><p>遇到的问题：post对象需要在post-meta外部通过遍历site.posts来获得,但是需要在post-meta内部调用获得具体value。</p><p>解决方式：将post对象传递到post-meta中，就可以在post-meta中直接调用。</p><pre><code class="javascript">&lt;!--index.ejs--&gt;&lt;%- partial(&#39;_partial/post-meta&#39;,{post: post}) %&gt;</code></pre><p>在<a href="https://ngudream.com/2016/07/09/hexo-advanced/" target="_blank" rel="noopener">这篇博客</a>中有更加详细的说明和介绍。</p><h1 id="创建一个显示所有分类-标签的页面"><a href="#创建一个显示所有分类-标签的页面" class="headerlink" title="创建一个显示所有分类/标签的页面"></a>创建一个显示所有分类/标签的页面</h1><p>主题中原有的<code>category.ejs</code>和<code>tag.ejs</code>文件都是属于单个对象的页面。<br>Hexo内置会创建页面显示某个<code>categories</code>下的所有文章，<code>tag</code>同理.</p><p>e.g. <code>categories/technique.html</code></p><p>但不会像<code>archive</code>一样自动创建一个<code>categories/index.html.</code><br>使用其他主题的时候,同样<code>categories</code>，<code>tags</code>需要在根目录<code>source</code>文件夹下面创一个对应的文件夹，再创建一个<code>index.md</code>，Hexo 里面没有预置。</p><p>解决方式:</p><ol><li>命令行输入<code>$ Hexo new page categories</code><br><code>source/categories/index.md</code>修改<code>type:&quot;categories&quot;</code></li><li><code>layout/_partial</code>中创建<code>categories.ejs</code><pre><code class="javascript">&lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;archive&quot;&gt;   &lt;div class=&quot;archive-title&quot;&gt;分类&lt;/div&gt;   &lt;div class=&quot;catelist&quot;&gt;       &lt;% site.categories.each(function(category) { %&gt;          &lt;div&gt;&lt;a href=&quot;&lt;%- url_for(category.path) %&gt;&quot;&gt;&lt;%= category.name%&gt;&lt;/a&gt;&lt;/div&gt;       &lt;% }); %&gt;   &lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</code></pre></li><li>在<code>page.ejs</code>中判断<pre><code class="javascript">&lt;% if (is_page() &amp;&amp; page.type === &#39;tags&#39;) { %&gt; &lt;%- partial(&#39;_partial/tags&#39;) %&gt;&lt;% }else if(is_page() &amp;&amp; page.type === &#39;categories&#39;){%&gt; &lt;%- partial(&#39;_partial/categories&#39;) %&gt; &lt;% }else if(is_page() &amp;&amp; page.type === &#39;about&#39;){%&gt;     &lt;%- partial(&#39;_partial/about&#39;) %&gt;&lt;% }else{%&gt; &lt;%- partial(&#39;_partial/article&#39;) %&gt;&lt;% } %&gt;</code></pre></li></ol><p>自己第一次做的时候走了非常多的弯路，看了半天hexo文档也没搞清楚，最后看到了<a href="https://ngudream.com/2016/07/09/hexo-advanced/" target="_blank" rel="noopener">这篇博客</a>，解决了问题，感谢博主的记录和分享。</p><h1 id="代码部分高亮"><a href="#代码部分高亮" class="headerlink" title="代码部分高亮"></a>代码部分高亮</h1><p>Hexo内置的是highlight.js实现代码高亮，但我数次尝试发现有问题，无法显示。于是查阅了一下相关资料，以及highlight的官网：有非常详细的使用说明<a href="https://highlightjs.org/usage/" target="_blank" rel="noopener">usage</a>。支持非常多的语言。<br>具体需要引入script，引入css。具体的颜色主题可以自由选择，我选择的是atom的one dark。</p><h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><ul><li>官方<a href="https://hexo.io/docs/variables" target="_blank" rel="noopener">Doc</a>，大家都说写的不好，但是有还是比没有强。</li><li>文章的目录和进度借鉴了<a href="https://www.cnblogs.com/yyhh/p/11058985.html" target="_blank" rel="noopener">这片教程</a>。</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Hexo </tag>
+            
+            <tag> EJS </tag>
+            
+            <tag> 前端 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>关于nohup的一些记录</title>
+      <link href="/2020/03/11/nohup/"/>
+      <url>/2020/03/11/nohup/</url>
+      
+        <content type="html"><![CDATA[<p>linux nohup的备忘录<br> <a id="more"></a></p><h3 id="不挂断的运行进程"><a href="#不挂断的运行进程" class="headerlink" title="不挂断的运行进程"></a>不挂断的运行进程</h3><pre><code class="bash">$ nohup Command [ Arg … ] [　&amp; ]</code></pre><h3 id="查看当前有多少在后台运行的命令"><a href="#查看当前有多少在后台运行的命令" class="headerlink" title="查看当前有多少在后台运行的命令"></a>查看当前有多少在后台运行的命令</h3><p>单次shell内有效</p><pre><code class="bash">$ jobs -l</code></pre><p>Process Status</p><pre><code class="bash">$ ps -ef</code></pre><pre><code class="bash">$ ps aux</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> command </tag>
+            
+            <tag> 服务器 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/2020/03/10/hello-world/"/>
+      <url>/2020/03/10/hello-world/</url>
+      
+        <content type="html"><![CDATA[<p>HEXO 你好.<br> <a id="more"></a><br>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;</code></pre><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server</code></pre><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate</code></pre><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy</code></pre><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Hexo </tag>
+            
+            <tag> Node.js </tag>
+            
+            <tag> blog </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Java基础总结</title>
+      <link href="/2019/12/22/java-basics/"/>
+      <url>/2019/12/22/java-basics/</url>
+      
+        <content type="html"><![CDATA[<p>找工作期间的复习笔记之Java基础，部分来源于网络.<br> <a id="more"></a></p><h1 id="反编译指令"><a href="#反编译指令" class="headerlink" title="反编译指令:"></a>反编译指令:</h1><p><code>javap -verbose</code></p><h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><h2 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h2><pre><code>    byte/8    char/16    short/16    int/32    float/32    long/64    double/64    boolean/~</code></pre><h2 id="包装类型"><a href="#包装类型" class="headerlink" title="包装类型"></a>包装类型</h2><pre><code>Integer.valueOf(2)X.intValue()</code></pre><p>装箱和拆箱, AutoBoxing and Unboxing</p><h1 id="String"><a href="#String" class="headerlink" title="String"></a>String</h1><h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><ol><li>final类 不可被继承 (包装类都不能被继承)</li><li>JAVA8 内部使用char数组存储数据</li><li>JAVA9 开始改用byte数组存储字符串 用coder来标示使用哪种编码</li><li>byte数组是final的, String内部也没有改变的方法, 因此可以保证String不可变</li><li>不可变的好处<br>可以缓存hash值<br>可以使得String Pool得以实现<br>安全性<br>线程安全</li></ol><h2 id="String-StringBuffer-StringBuilder"><a href="#String-StringBuffer-StringBuilder" class="headerlink" title="String, StringBuffer, StringBuilder"></a>String, StringBuffer, StringBuilder</h2><ol><li>string 不可变,线程安全</li><li>StringBuilder可变，不是线程安全的</li><li>StringBuffer可变，是线程安全的,内部使用synchronised进行同步</li></ol><h2 id="String-Pool和intern"><a href="#String-Pool和intern" class="headerlink" title="String Pool和intern()"></a>String Pool和intern()</h2><ol><li>intern()返回string在StringPool中的引用</li><li>StringPool存在JVM堆中</li></ol><h1 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h1><h2 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h2><p>Java的参数是以值传递的形式传入方法中,而不是引用传递</p><h2 id="隐式向下转型"><a href="#隐式向下转型" class="headerlink" title="隐式向下转型"></a>隐式向下转型</h2><p>Java不支持精度降低的隐式向下转型</p><h2 id="隐式类型转换"><a href="#隐式类型转换" class="headerlink" title="隐式类型转换"></a>隐式类型转换</h2><p>使用+= 或者++运算可以实现隐式类型转换</p><h2 id="Switch"><a href="#Switch" class="headerlink" title="Switch"></a>Switch</h2><p>从JAVA7开始支持 String,但是不支持 long<br>int 是肯定支持啦</p><h1 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h1><h2 id="final"><a href="#final" class="headerlink" title="final"></a>final</h2><ol><li>数据</li></ol><ul><li>声明数据为常量，可以是编译时常量，也可以是在运行时被初始化后不能被改变的常量。</li><li>对于基本类型，final 使数值不变；</li><li>对于引用类型，final 使不能引用其它对象，但是被引用的对象本身是可以修改的。</li></ul><ol start="2"><li>方法</li></ol><ul><li>声明方法不能被子类重写。</li><li>private 方法隐式地被指定为 final, 如果在子类中定义的方法和基类中的一个 private 方法签名相同，此时子类的方法不是重写基类方法，而是在子类中定义了一个新的方法。</li></ul><ol start="3"><li>类</li></ol><ul><li>声明类不允许被继承</li></ul><h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><ol><li>静态变量</li></ol><ul><li>又称类变量,属于该类,类的所有实例共享,在内存中只存在一份,通过类名来访问</li></ul><ol start="2"><li>静态方法</li></ol><ul><li>在类加载的时候就存在了,不依赖任何实例,所以必须有实现,不能是抽象方法</li><li>静态方法只能访问所属类的静态变量和静态方法</li></ul><ol start="3"><li>静态内部类<pre><code>初始化顺序父类（静态变量、静态语句块） 子类（静态变量、静态语句块） 父类（实例变量、普通语句块） 父类（构造函数） 子类（实例变量、普通语句块） 子类（构造函数）</code></pre></li></ol><h1 id="Object的方法"><a href="#Object的方法" class="headerlink" title="Object的方法"></a>Object的方法</h1><ol><li>equal</li></ol><ul><li>== 判断地址</li><li>hashcode</li></ul><ol start="2"><li>clone</li></ol><ul><li>必须实现接口 cloneable</li><li>object 的 protected 必须重写才能调用</li></ul><h2 id="浅拷贝和深拷贝之分"><a href="#浅拷贝和深拷贝之分" class="headerlink" title="浅拷贝和深拷贝之分"></a>浅拷贝和深拷贝之分</h2><ul><li>浅拷贝复制一个对象引用相同地址</li><li>深拷贝复制一个对象引用不同地址</li><li>clone的替代方案是创建克隆构造函数或者拷贝工厂</li></ul><h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><h2 id="访问权限-封装"><a href="#访问权限-封装" class="headerlink" title="访问权限, 封装"></a>访问权限, 封装</h2><p>三个访问权限修饰符：private、protected 以及 public，如果不加,默认protected</p><h2 id="抽象类与接口"><a href="#抽象类与接口" class="headerlink" title="抽象类与接口"></a>抽象类与接口</h2><ol><li>抽象类<ul><li>有抽象方法必然是抽象类, 可以有非抽象方法</li><li>抽象类不能被实例化只能被继承</li></ul></li><li>接口<ul><li>接口从Java8开始,可以有方法实现</li><li>接口的成员默认都是public的,并且不允许定义为private或者protected</li><li>接口的字段默认都是static和final的</li></ul></li><li>比较<ul><li>一个类可以实现多个接口,但是不能继承多个类</li><li>接口的字段只能是static和final类型的, 抽象类无限制</li><li>接口的成员只能是public的,而抽象类的成员可以有很多种访问权限</li></ul></li><li>使用选择<ul><li>使用接口：<ul><li>需要让不相关的类都实现一个方法，例如不相关的类都可以实现 Compareable 接口中的 compareTo() 方法；</li><li>需要使用多重继承。</li></ul></li><li>使用抽象类：<ul><li>需要在几个相关的类中共享代码。</li><li>需要能控制继承来的成员的访问权限，而不是都为 public。</li><li>需要继承非静态和非常量字段。</li><li>在很多情况下，接口优先于抽象类。因为接口没有抽象类严格的类层次结构要求，可以灵活地为一个类添加行为。并且从 Java 8 开始，接口也可以有默认的方法实现，使得修改接口的成本也变的很低。</li><li>super调用父类</li></ul></li></ul></li></ol><h1 id="多态-重写和重载"><a href="#多态-重写和重载" class="headerlink" title="多态: 重写和重载"></a>多态: 重写和重载</h1><ol><li>重写（Override）<ul><li>存在于继承体系中，指子类实现了一个与父类在方法声明上完全相同的一个方法。</li><li>为了满足里式替换原则，重写有以下三个限制：<ul><li>子类方法的访问权限必须大于等于父类方法；</li><li>子类方法的返回类型必须是父类方法返回类型或为其子类型。</li><li>子类方法抛出的异常类型必须是父类抛出异常类型或为其子类型。</li></ul></li></ul></li><li>重载（Overload）<ul><li>存在于同一个类中，指一个方法与已经存在的方法名称上相同，但是参数类型、个数、顺序至少有一个不同。</li><li>应该注意的是，返回值不同，其它都相同不算是重载。</li><li>使用 <code>@Override</code> 注解，可以让编译器帮忙检查是否满足上面的三个限制条件</li></ul></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 知识点 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>

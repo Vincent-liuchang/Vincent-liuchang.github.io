@@ -13,6 +13,18 @@
 <meta name="generator" content="Hexo 4.2.0"></head>
 
   <body>
+    <div id="myModal" class="modal fade">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="search-input">
+      <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control"/>
+    </div>
+    <div id="local-search-result"></div>
+  </div>
+
+</div>
+
     <header class="header">
 <div class ="topBar">
   <div class="blog-title">
@@ -163,7 +175,8 @@
       
   </section>
   <aside class="sidebar">
-    <div class="widget">
+    <ion-icon name="search-outline" id="search-button"></ion-icon>
+<div class="widget">
   
     <div class="tagcloud">
         <div class="title">标签云</div>
@@ -182,9 +195,9 @@
         <div class="title">分类</div>
           <ul class="content">
             
-	             <li><a href="/categories/%E5%9F%BA%E7%A1%80/">·基础</a></li>
-            
 	             <li><a href="/categories/%E6%8A%80%E6%9C%AF/">·技术</a></li>
+            
+	             <li><a href="/categories/%E5%9F%BA%E7%A1%80/">·基础</a></li>
             
           </ul>
         </div>
@@ -206,6 +219,7 @@
 <script src="/highlight/highlight.pack.js"></script>
 
     <script>hljs.initHighlightingOnLoad();</script>
-    <script type="text/javascript" src="/js/1.js"></script>
+    <script type="text/javascript" src="/js/toc.js"></script>
+    <script type="text/javascript"  src="/js/search.js"></script>
   </body>
 </html>
