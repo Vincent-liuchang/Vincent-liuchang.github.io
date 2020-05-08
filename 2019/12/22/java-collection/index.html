@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <title>Vin Blog</title>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/highlight/styles/atom-one-dark.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  <body>
+    <div id="myModal" class="modal fade">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="search-input">
+      <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control"/>
+    </div>
+    <div id="local-search-result"></div>
+  </div>
+
+</div>
+
+    <header class="header">
+<div class ="topBar">
+  <div class="blog-title">
+    <a class="beer">🐻</a>
+    <a class="rabbit">🐰</a>
+    <a href="/" class="logo">Vin Blog</a>
+    <span class = "description">一个记录生活学习和工作的地方</span>
+  </div>
+  <nav class="navBar">
+    <ul class="menu">
+      <li class="menu-item">
+        <a href="/" class="menu-item-link">Home</a>
+      </li>
+      <li class="menu-item">
+        <a href="/archives" class="menu-item-link">Archive</a>
+      </li>
+      <li class="menu-item">
+        <a href="/categories" class="menu-item-link">Category</a>
+      </li>
+      <li class="menu-item">
+        <a href="/about" class="menu-item-link">About</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+</header>
+
+        <main class="main">
+            <div class="container">
+    <div class="postBox">
+    <article class="post">
+      <div class="post-title">
+        <div class="post-title">
+          <a>Java容器相关</a>
+        </div>
+      </div>
+      <div class="post-meta">
+        <post-meta>
+    <span class="post-time">22-12-2019</span>
+
+    <span class="post-meta-item post-meta-categories">
+        /
+        
+        <a class="category-link" href="/categories/%E5%9F%BA%E7%A1%80/">基础</a>
+        
+    </span>
+
+    <span class="post-meta-item post-meta-tags">
+        /
+        
+        <a class="tag-link" href="/tags/Java/" rel="tag">#JAVA</a>, <a class="tag-link" href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" rel="tag">#知识点</a>
+        
+    </span>
+</post-meta>
+
+        <span id="busuanzi_container_page_pv">
+          / <span id="busuanzi_value_page_pv"></span> views
+        </span>
+      </div>
+      <div class="post-content" id ="post-content">
+        <h1 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h1><p>Java数据结构(容器)主要包含 collection 和 Map两种.</p>
+<h2 id="Collection"><a href="#Collection" class="headerlink" title="Collection"></a>Collection</h2><h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><p>Set是不允许重复的集合</p>
+<ul>
+<li>TreeSet</li>
+<li>HashSet</li>
+<li>LinkedHashSet</li>
+</ul>
+<h3 id="List"><a href="#List" class="headerlink" title="List"></a>List</h3><p>List接口可以存储不唯一的有序的对象</p>
+<ul>
+<li>ArrayList</li>
+<li>Vector</li>
+<li>LinkedList</li>
+<li>Vector的子类Stack实现后进先出</li>
+</ul>
+<h3 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h3><ul>
+<li>LinkedList</li>
+<li>PriorityQueue</li>
+</ul>
+<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><p>Map使用键值对，Key不能重复。</p>
+<ul>
+<li>TreeMap</li>
+<li>HashMap</li>
+<li>HashTable</li>
+<li>LinkedHashMap</li>
+</ul>
+<h1 id="具体特点"><a href="#具体特点" class="headerlink" title="具体特点"></a>具体特点</h1><p>数组支持高效的随机元素访问（根据下标来随机访问）<br>链表不支持快速随机访问，但是插入删除效率高</p>
+<h2 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h2><p>底层使用的是Object数组<br>会预留一部分容量空间<br>ArrayList的扩容</p>
+<h2 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h2><p>底层使用的是双向链表<br>每一个元素都要存放两个指针</p>
+<h2 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h2><p>synchronised包裹ArrayList进行同步，是线程安全的</p>
+<h2 id="Collections-synchronizedList"><a href="#Collections-synchronizedList" class="headerlink" title="Collections. synchronizedList()"></a>Collections. synchronizedList()</h2><h2 id="concurrent并发包下的CopyOnWriteArrayList"><a href="#concurrent并发包下的CopyOnWriteArrayList" class="headerlink" title="concurrent并发包下的CopyOnWriteArrayList"></a>concurrent并发包下的CopyOnWriteArrayList</h2><p>读写分离<br>写操作需要加锁,防止并发写入时导致写入数据丢失<br>写操作结束之后需要把原始数组指向新的复制数组<br>缺点在于内存占用翻倍,以及数据不一致</p>
+<h2 id="HashMap底层数据结构"><a href="#HashMap底层数据结构" class="headerlink" title="HashMap底层数据结构"></a>HashMap底层数据结构</h2><p>数组+链表 从1.8开始，因为查找效率，引入了数组+红黑树（链表长度大于阈值默认为8）<br>二叉树和红黑树<br>红黑树是一种自平衡二叉树，区别于AVL树</p>
+
+      </div>
+    </article>
+    <div id="disqus_thread"></div>
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://vincent-blog.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+
+</div>
+
+  <aside class="toc">
+    <div id="toc"></div>
+
+  </aside>
+</div>
+
+        </main>
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<script src="/highlight/highlight.pack.js"></script>
+
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/javascript" src="/js/toc.js"></script>
+    <script type="text/javascript"  src="/js/search.js"></script>
+    <script id="dsq-count-scr" src="//vincent-blog.disqus.com/count.js" async></script>
+  </body>
+</html>
