@@ -294,6 +294,11 @@ aside ul {
   list-style-type: none;
   margin-left: -30px;
 }
+#disqus_thread {
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 50px;
+}
 #toc {
   margin-top: 20px;
   position: fixed;
